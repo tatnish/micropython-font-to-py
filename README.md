@@ -1,3 +1,17 @@
+# About This Fork
+
+This fork of micropython-font-to-py is modified to properly convert CJK fonts that has more than 256 chars. The original micropython-font-to-py cannot generate an output py file for fonts when the font data becomes more than 65535 bytes. This fork of the script resolves it by the following modifications:
+
+  1. data offset integer in sparse is expanded from 2 bytes to 4 bytes 
+     * original fork becomes overflow when convering CJK fonts
+     * char code in sparse is also expanded to 4 bytes for minimum code change
+  2. allowing unicode character 0x3000 to be converted properly
+     * 0x3000 is IDEOGRAPHIC SPACE ;space character for CJK fonts
+
+Now it can successfully generate python script that contains CJK font data.
+
+The followings are the README included in the original micropython-font-to-py
+
 # MicroPython font handling
 
 This repository defines a method of creating and deploying fonts for use with
